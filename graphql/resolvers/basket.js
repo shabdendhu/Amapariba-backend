@@ -1,30 +1,30 @@
-const { tbl_brands } = require("../../database/models");
+const { tbl_baskets } = require("../../database/models");
 module.exports = {
   Mutation: {
-    async create_new_brand(_, { input }) {
-      const { name, company_name, ratings, created_by } = input;
-      return tbl_brands.create({ name, company_name, ratings, created_by });
+    async create_new_basket(_, { input }) {
+      const { product_id, user_id, created_by } = input;
+      return tbl_baskets.create({ product_id, user_id, created_by });
     },
-    async update_brand(_, { input }) {
-      const { id, name, company_name, ratings, updated_by, is_active } = input;
-      const updataRes = await tbl_brands.update(
-        { id, name, company_name, ratings, updated_by, is_active },
+    async update_basket(_, { input }) {
+      const { id, product_id, user_id, updated_by, is_active } = input;
+      const updataRes = await tbl_baskets.update(
+        { id, product_id, user_id, updated_by, is_active },
         { returning: false, where: { id } }
       );
       return { status: updataRes[0] };
     },
-    async delete_brand(_, { id }) {
-      const data = tbl_brands.destroy({ where: { id: id } });
+    async delete_asket(_, { id }) {
+      const data = tbl_baskets.destroy({ where: { id: id } });
       return { status: data };
     },
   },
 
   Query: {
-    async get_allBrand(root, args, context) {
-      return tbl_brands.findAll();
+    async get_allBasket(root, args, context) {
+      return tbl_baskets.findAll();
     },
     async get_brand_by_id(_, { id }, context) {
-      return tbl_brands.findByPk(id);
+      return tbl_baskets.findByPk(id);
     },
   },
 };

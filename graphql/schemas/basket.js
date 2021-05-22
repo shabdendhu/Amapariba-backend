@@ -2,49 +2,44 @@ const { gql } = require("apollo-server-express");
 
 module.exports = gql`
   extend type Query {
-    get_allBrand: [Brand]
-    get_brand_by_id(id: Int!): Brand
+    get_allBasket: [Basket]
+    get_basket_by_id(id: Int!): Basket
   }
-  type Brand {
-    id: Int
-    name: String
-    company_name: Int
-    rating: Int
+  type Basket {
+    id: Int!
+    product_id: Int!
+    user_id: Int!
     created_by: Int
     updated_by: Int
     is_active: Boolean
   }
   extend type Mutation {
-    create_new_brand(input: AddBrandInput!): AddBrandResponse
-    update_brand(input: UpdateBrandInput!): UpdateBrandResponse
-    delete_brand(id: Int!): DeleteBrandResponse
+    create_new_basket(input: AddBasketInput!): AddBasketResponse
+    update_basket(input: UpdateBasketInput!): UpdateBasketResponse
+    delete_asket(id: Int!): DeleteBasketResponse
   }
-  type UpdateBrandResponse {
+  type UpdateBasketResponse {
     status: Int
   }
-  type DeleteBrandResponse {
+  type DeleteBasketResponse {
     status: Int
   }
-  input AddBrandInput {
-    name: String
-    category_id: Int
-    brand_id: Int
-    image: String
-    rating: Int
+  input AddBasketInput {
+    product_id: Int!
+    user_id: Int!
     created_by: Int
   }
-  type AddBrandResponse {
-    name: String
-    category_id: Int
-    brand_id: Int
+  type AddBasketResponse {
+    id: Int!
+    product_id: Int!
+    user_id: Int!
+    created_by: Int
   }
-  input UpdateBrandInput {
-    id: Int
-    name: String
-    category_id: Int
-    brand_id: Int
-    image: String
-    rating: Int
+  input UpdateBasketInput {
+    id: Int!
+    product_id: Int!
+    user_id: Int!
+    created_by: Int
     updated_by: Int
     is_active: Boolean
   }
