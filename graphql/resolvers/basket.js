@@ -13,7 +13,7 @@ module.exports = {
       );
       return { status: updataRes[0] };
     },
-    async delete_asket(_, { id }) {
+    async delete_basket(_, { id }) {
       const data = tbl_baskets.destroy({ where: { id: id } });
       return { status: data };
     },
@@ -21,10 +21,16 @@ module.exports = {
 
   Query: {
     async get_allBasket(root, args, context) {
-      return tbl_baskets.findAll();
+      return tbl_baskets.findAll({
+        include: ["product", "user"],
+      });
     },
-    async get_brand_by_id(_, { id }, context) {
-      return tbl_baskets.findByPk(id);
+    async get_basket_by_id(_, { id }, context) {
+     
+      return tbl_baskets.findAll({
+        include: ["product", "user"],
+        where: { user_id: id },
+      });
     },
   },
 };

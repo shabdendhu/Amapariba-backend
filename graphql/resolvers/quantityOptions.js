@@ -21,10 +21,15 @@ module.exports = {
 
   Query: {
     async get_allQuantityOptions(root, args, context) {
-      return tbl_quantity_options.findAll();
+      return tbl_quantity_options.findAll({
+        include: ["product"],
+      });
     },
     async get_quantityOptions_by_id(_, { id }, context) {
-      return tbl_quantity_options.findAll({ where: { product_id: id } });
+      return tbl_quantity_options.findAll({
+        include: ["product","unit"],
+        where: { product_id: id },
+      });
     },
   },
 };

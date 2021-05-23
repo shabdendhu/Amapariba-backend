@@ -44,10 +44,17 @@ module.exports = (sequelize, Sequelize) => {
       },
     },
     { createdAt: false, updatedAt: false }
-  );QuantityOptions.associate = function (models) {
+  );
+  QuantityOptions.associate = function (models) {
     // associations can be defined here
-    // Product.belongsTo(models.tbl_categorys, { foreignKey: "category_id", as: "category", });
-    // Product.belongsTo(models.tbl_brands, {foreignKey: "brand_id", as: "brand",});
+    QuantityOptions.belongsTo(models.tbl_products, {
+      foreignKey: "product_id",
+      as: "product",
+    });
+    QuantityOptions.belongsTo(models.tbl_units, {
+      foreignKey: "unit_id",
+      as: "unit",
+    });
   };
 
   return QuantityOptions;

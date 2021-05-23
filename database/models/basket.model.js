@@ -1,5 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
-    const Basket = sequelize.define("tbl_baskets", {
+  const Basket = sequelize.define(
+    "tbl_baskets",
+    {
       product_id: {
         type: Sequelize.INTEGER,
         // primaryKey: true,
@@ -32,8 +34,19 @@ module.exports = (sequelize, Sequelize) => {
         defaultValue: "1",
       },
     },
-    { createdAt: false, updatedAt: false });
-  
-    return Basket;
+    { createdAt: false, updatedAt: false }
+  );
+  Basket.associate = function (models) {
+    // associations can be defined here
+    Basket.belongsTo(models.tbl_products, {
+      foreignKey: "product_id",
+      as: "product",
+    });
+    Basket.belongsTo(models.tbl_users, {
+      foreignKey: "user_id",
+      as: "user",
+    });
   };
-  
+
+  return Basket;
+};

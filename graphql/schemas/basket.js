@@ -3,7 +3,7 @@ const { gql } = require("apollo-server-express");
 module.exports = gql`
   extend type Query {
     get_allBasket: [Basket]
-    get_basket_by_id(id: Int!): Basket
+    get_basket_by_id(id: Int!): [Basket]
   }
   type Basket {
     id: Int!
@@ -12,11 +12,34 @@ module.exports = gql`
     created_by: Int
     updated_by: Int
     is_active: Boolean
+    product: BasketProduct
+    user: BasketUser
+  }
+  type BasketUser {
+    id: Int!
+    name: String!
+    email_id: String!
+    user_type: String
+    mobile_no: String
+    created_by: Int
+    updated_by: Int
+    is_active: Boolean
+  }
+  type BasketProduct {
+    id: Int
+    name: String
+    category_id: Int
+    brand_id: Int
+    image: String
+    rating: Int
+    created_by: Int
+    updated_by: Int
+    is_active: Boolean
   }
   extend type Mutation {
     create_new_basket(input: AddBasketInput!): AddBasketResponse
     update_basket(input: UpdateBasketInput!): UpdateBasketResponse
-    delete_asket(id: Int!): DeleteBasketResponse
+    delete_basket(id: Int!): DeleteBasketResponse
   }
   type UpdateBasketResponse {
     status: Int

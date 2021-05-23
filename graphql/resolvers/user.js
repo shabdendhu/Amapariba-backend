@@ -13,14 +13,15 @@ module.exports = {
 
     async login(root, { input }, context) {
       const { email_id, password } = input;
-      const user = await tbl_users.findOne({ where: { email_id } }).then((data) => {
-        console.log(data.dataValues.password)
+      const user = await tbl_users.findOne({ include: ["basket"], where: { email_id } }).then((data) => {
+        console.log(data.dataValues.basket[0].dataValues)
         if (password === data.dataValues.password) {
           return data.dataValues;
         } else {
           throw new AuthenticationError("Invalid credentials");
         }
       });
+      
       return user
       //   if (user && bcrypt.compareSync(password, user.password)) {
       //     const token = jwt.sign({ id: user.id }, 'mySecret');

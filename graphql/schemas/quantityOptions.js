@@ -15,6 +15,27 @@ module.exports = gql`
     created_by:Int
     updated_by:Int
     is_active:Boolean
+    product:QuantityOptionsProduct
+    unit:QuantityOptionsUnit
+  }
+  type QuantityOptionsUnit {
+    id: Int
+    full_name: String
+    short_name: String
+    created_by: Int
+    updated_by: Int
+    is_active: Boolean
+  }
+  type QuantityOptionsProduct{
+    id: Int
+    name: String
+    category_id: Int
+    brand_id: Int
+    image: String
+    rating: Int
+    created_by: Int
+    updated_by: Int
+    is_active: Boolean
   }
   extend type Mutation {
     create_new_quantityOptions(input: AddQuantityOptionsInput!): AddQuantityOptionsResponse

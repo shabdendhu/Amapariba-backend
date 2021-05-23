@@ -8,7 +8,7 @@ module.exports = gql`
   type Unit {
     id: Int
     full_name: String
-    short_name: Int
+    short_name: String
     created_by: Int
     updated_by: Int
     is_active: Boolean
@@ -26,17 +26,17 @@ module.exports = gql`
   }
   input AddUnitInput {
     full_name: String
-    short_name: Int
+    short_name: String
     created_by: Int
   }
   type AddUnitResponse {
     full_name: String
-    short_name: Int
+    short_name: String
   }
   input UpdateUnitInput {
     id: Int
     full_name: String
-    short_name: Int
+    short_name: String
     created_by: Int
     updated_by: Int
     is_active: Boolean

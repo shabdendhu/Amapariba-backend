@@ -38,5 +38,15 @@ module.exports = (sequelize, Sequelize) => {
     },
     { createdAt: false, updatedAt: false }
   );
+  User.associate = function (models) {
+    // associations can be defined here
+    User.belongsToMany(models.tbl_products, {
+      through: { model: models.tbl_baskets },
+      foreignKey: "user_id",
+      as: "basket",
+    });
+    // User.hasMany(models.tbl_products, { foreignKey: "user_id", as: "basket" });
+    // User.hasMany(models.tbl_products, { foreignKey: "category_id", as: "product" });
+  };
   return User;
 };
