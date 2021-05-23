@@ -3,7 +3,7 @@ const { gql } = require("apollo-server-express");
 module.exports = gql`
   extend type Query {
     get_allQuantityOptions: [QuantityOptions]
-    get_quantityOptions_by_id(id: Int!): QuantityOptions
+    get_quantityOptions_by_id(id: Int!): [QuantityOptions]
   }
   type QuantityOptions {
     id:Int!

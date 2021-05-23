@@ -28,8 +28,13 @@ module.exports = {
 
   Query: {
     async get_allCategory(root, args, context) {
-      console.log("tbl_categorys.findAll()");
-      return tbl_categorys.findAll();
+      // const data =await tbl_categorys.findAll({
+      //   include: ["product"],
+      // })
+      // console.log(data[0].dataValues.product[1].dataValues);
+      return tbl_categorys.findAll({
+        include: ["product"],
+      });
     },
     async get_Category_by_id(_, { id }, context) {
       console.log("tbl_categorys.findAll()");

@@ -48,7 +48,15 @@ module.exports = {
 
   Query: {
     async get_allProduct(root, args, context) {
-      return tbl_products.findAll();
+      // const data =await tbl_products.findAll({
+      //   include: ["category"],
+      // })
+      // console.log(data[0].dataValues)
+      // return data
+      // [0].dataValues.category.dataValues
+      return tbl_products.findAll({
+        include: ["category","brand"],
+      });
     },
     async get_product_by_id(_, { id }, context) {
       return tbl_products.findByPk(id);

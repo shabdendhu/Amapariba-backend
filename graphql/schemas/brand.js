@@ -8,8 +8,8 @@ module.exports = gql`
   type Brand {
     id: Int
     name: String
-    company_name: Int
-    rating: Int
+    company_name: String
+    ratings: Int
     created_by: Int
     updated_by: Int
     is_active: Boolean
@@ -27,24 +27,23 @@ module.exports = gql`
   }
   input AddBrandInput {
     name: String
-    category_id: Int
-    brand_id: Int
-    image: String
-    rating: Int
+    company_name: String
+    ratings: Int
     created_by: Int
   }
   type AddBrandResponse {
+    id: Int
     name: String
-    category_id: Int
-    brand_id: Int
+    company_name: String
+    ratings: Int
+    created_by: Int
   }
   input UpdateBrandInput {
     id: Int
     name: String
-    category_id: Int
-    brand_id: Int
-    image: String
-    rating: Int
+    company_name: String
+    ratings: Int
+    created_by: Int
     updated_by: Int
     is_active: Boolean
   }

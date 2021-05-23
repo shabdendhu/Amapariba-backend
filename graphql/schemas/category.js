@@ -11,6 +11,18 @@ module.exports = gql`
     created_by: Int
     updated_by: Int
     is_active: Boolean
+    product: [Product]
+  }
+  type Product {
+    id: Int
+    name: String
+    category_id: Int
+    brand_id: Int
+    image: String
+    rating: Int
+    created_by: Int
+    updated_by: Int
+    is_active: Boolean
   }
   extend type Mutation {
     create_new_category(input: AddCategoryInput!): AddCategoryResponse

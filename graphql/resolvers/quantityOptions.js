@@ -6,9 +6,9 @@ module.exports = {
       return tbl_quantity_options.create({ full_name, short_name, created_by });
     },
     async update_quantityOptions(_, { input }) {
-      const { id,full_name, short_name, updated_by, is_active } = input;
+      const { id, full_name, short_name, updated_by, is_active } = input;
       const updataRes = await tbl_quantity_options.update(
-        { id,full_name, short_name, updated_by, is_active },
+        { id, full_name, short_name, updated_by, is_active },
         { returning: false, where: { id } }
       );
       return { status: updataRes[0] };
@@ -24,7 +24,7 @@ module.exports = {
       return tbl_quantity_options.findAll();
     },
     async get_quantityOptions_by_id(_, { id }, context) {
-      return tbl_quantity_options.findByPk(id);
+      return tbl_quantity_options.findAll({ where: { product_id: id } });
     },
   },
 };
