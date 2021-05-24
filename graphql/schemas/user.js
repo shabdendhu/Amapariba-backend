@@ -11,14 +11,16 @@ module.exports = gql`
     updated_by: Int
     is_active: Boolean
     password: String!
-   
   }
-  
+
   extend type Mutation {
     register(input: RegisterInput!): RegisterResponse
     login(input: LoginInput!): LoginResponse
   }
-
+  input LoginInput {
+    email_id: String!
+    password: String!
+  }
   type RegisterResponse {
     name: String!
     email_id: String!
@@ -35,23 +37,6 @@ module.exports = gql`
     password: String!
   }
 
-  input LoginInput {
-    email_id: String!
-    password: String!
-  }
-
-  type LoginResponse {
-    id: Int!
-    name: String!
-    email_id: String!
-    user_type: String
-    mobile_no: String
-    created_by: Int
-    updated_by: Int
-    is_active: Boolean
-    password: String!
-    basket: [UserBasketProduct]
-  }
   type UserBasketProduct {
     id: Int
     name: String
@@ -62,5 +47,26 @@ module.exports = gql`
     created_by: Int
     updated_by: Int
     is_active: Boolean
+    tbl_baskets: tbl_baskets
+  }
+  type tbl_baskets {
+    product_id: Int!
+    user_id: Int!
+    created_by: Int
+    updated_by: Int
+    is_active: Boolean
+  }
+  type LoginResponse {
+    id: Int!
+    name: String!
+    email_id: String!
+    user_type: String
+    mobile_no: String
+    created_by: Int
+    updated_by: Int
+    is_active: Boolean
+    token: String!
+    basket: [UserBasketProduct]
+   
   }
 `;

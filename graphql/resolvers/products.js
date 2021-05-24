@@ -1,4 +1,6 @@
 const { tbl_products } = require("../../database/models");
+const { AuthenticationError, ApolloError } = require('apollo-server-express');
+
 module.exports = {
   Mutation: {
     async create_new_product(_, { input }) {
@@ -14,7 +16,10 @@ module.exports = {
         created_by,
       });
     },
-    async update_product(_, { input }) {
+    async update_product(_, { input }, { user = null }) {
+      if (!user) {
+        throw new AuthenticationError('You must login to create a comment');
+      }
       const {
         id,
         name,
@@ -40,20 +45,27 @@ module.exports = {
       );
       return { status: updataRes[0] };
     },
-    async delete_product(_, { id }) {
+    async delete_product(_, { id }, { user = null }) {
+      if (!user) {
+        throw new AuthenticationError('You must login to create a comment');
+      }
       const data = tbl_products.destroy({ where: { id: id } });
       return { status: data };
     },
   },
 
   Query: {
-    async get_allProduct(root, args, context) {
+    async get_allProduct(root, args, { user = null }) {
+      if (!user) {
+        throw new AuthenticationError('You must login to create a comment');
+      }
       // const data =await tbl_products.findAll({
       //   include: ["category"],
       // })
       // console.log(data[0].dataValues)
       // return data
       // [0].dataValues.category.dataValues
+      console.log("contextcontextcontextcontextcontext",user)
       return tbl_products.findAll({
         include: ["category","brand"],
       });

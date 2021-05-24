@@ -1,5 +1,5 @@
-// const jwt = require('jsonwebtoken');
-// const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const { AuthenticationError } = require("apollo-server-express");
 
 const { tbl_users } = require("../../database/models");
@@ -11,23 +11,27 @@ module.exports = {
       return tbl_users.create({ name, password, email_id, mobile_no });
     },
 
+    // async login(root, { input }, context) {
+    //   const { email_id, password } = input;
+    //   const user = await tbl_users.findOne({ include: ["basket"], where: { email_id } }).then((data) => {
+    //     console.log(data.dataValues.basket[0].dataValues)
+    //     if (password === data.dataValues.password) {
+    //       return data.dataValues;
+    //     } else {
+    //       throw new AuthenticationError("Invalid credentials");
+    //     }
+    //   });
+      
+    //   return user
+    // },
     async login(root, { input }, context) {
       const { email_id, password } = input;
-      const user = await tbl_users.findOne({ include: ["basket"], where: { email_id } }).then((data) => {
-        console.log(data.dataValues.basket[0].dataValues)
-        if (password === data.dataValues.password) {
-          return data.dataValues;
-        } else {
-          throw new AuthenticationError("Invalid credentials");
-        }
-      });
-      
-      return user
-      //   if (user && bcrypt.compareSync(password, user.password)) {
-      //     const token = jwt.sign({ id: user.id }, 'mySecret');
-      //     return { ...user.toJSON(), token };
-      //   }
-      //   throw new AuthenticationError('Invalid credentials');
+      const user = await tbl_users.findOne({include: ["basket"], where: { email_id } });
+      if (user&&password === user.password) {
+        const token = jwt.sign({ id: user.id }, 'mySecret');
+        return { ...user.toJSON(), token };
+      }
+      throw new AuthenticationError('Invalid credentials');
     },
   },
 };
