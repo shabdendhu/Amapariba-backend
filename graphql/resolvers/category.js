@@ -1,14 +1,17 @@
 const { tbl_categorys } = require("../../database/models");
+const ErroeHandler = require("../../errors");
 module.exports = {
   Mutation: {
-    async create_new_category(_, { input }) {
+    async create_new_category(_, { input }, { user = null }) {
+      ErroeHandler.is_admin(user);
       const { name, created_by } = input;
       return tbl_categorys.create({
         name,
         created_by,
       });
     },
-    async update_category(_, { input }) {
+    async update_category(_, { input }, { user = null }) {
+      ErroeHandler.is_admin(user);
       const { id, name, updated_by, is_active } = input;
       const updataRes = await tbl_categorys.update(
         {
@@ -20,7 +23,8 @@ module.exports = {
       );
       return { status: updataRes[0] };
     },
-    async delete_category(_, { id }) {
+    async delete_category(_, { id }, { user = null }) {
+      ErroeHandler.is_admin(user);
       const data = tbl_categorys.destroy({ where: { id: id } });
       return { status: data };
     },

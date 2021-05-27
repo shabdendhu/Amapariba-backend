@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: true,
       },
       mobile_no: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(10),
         allowNull: true,
       },
       email_id: {

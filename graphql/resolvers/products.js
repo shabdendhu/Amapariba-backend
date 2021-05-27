@@ -1,9 +1,10 @@
 const { tbl_products } = require("../../database/models");
-const { AuthenticationError, ApolloError } = require('apollo-server-express');
-
+const { AuthenticationError } = require("apollo-server-express");
+const ErroeHandler = require("../../errors");
 module.exports = {
   Mutation: {
-    async create_new_product(_, { input }) {
+    async create_new_product(_, { input }, { user = null }) {
+      ErroeHandler.is_admin(user);
       const { id, name, category_id, brand_id, image, rating, created_by } =
         input;
       return tbl_products.create({
@@ -17,9 +18,7 @@ module.exports = {
       });
     },
     async update_product(_, { input }, { user = null }) {
-      if (!user) {
-        throw new AuthenticationError('You must login to create a comment');
-      }
+      ErroeHandler.is_admin(user);
       const {
         id,
         name,
@@ -46,8 +45,9 @@ module.exports = {
       return { status: updataRes[0] };
     },
     async delete_product(_, { id }, { user = null }) {
+      ErroeHandler.is_admin(user);
       if (!user) {
-        throw new AuthenticationError('You must login to create a comment');
+        throw new AuthenticationError("You must login to create a comment");
       }
       const data = tbl_products.destroy({ where: { id: id } });
       return { status: data };
@@ -57,31 +57,11 @@ module.exports = {
   Query: {
     async get_allProduct(root, args, { user = null }) {
       if (!user) {
-        throw new AuthenticationError('You must login to create a comment');
+        throw new AuthenticationError("You must login to create a comment");
       }
-      // const data =await tbl_products.findAll({
-      //   include: ["category"],
-      // })
-      // console.log(data[0].dataValues)
-      // return data
-      // [0].dataValues.category.dataValues
-      console.log("contextcontextcontextcontextcontext",user)
-      return tbl_products.findAll({
-        include: ["category","brand"],
-      });
     },
     async get_product_by_id(_, { id }, context) {
       return tbl_products.findByPk(id);
     },
   },
-
-  // Product: {
-  //   author(post) {
-  //     return post.getAuthor();
-  //   },
-
-  //   comments(post) {
-  //     return post.getComments();
-  //   },
-  // },
 };

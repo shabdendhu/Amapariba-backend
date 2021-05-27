@@ -16,6 +16,16 @@ module.exports = gql`
   extend type Mutation {
     register(input: RegisterInput!): RegisterResponse
     login(input: LoginInput!): LoginResponse
+    add_newAdminUser(input: AdminInput!): AdminResponse
+  }
+  input AdminInput {
+    id: Int!
+    user_type: String!
+    updated_by: Int
+    is_active: Int
+  }
+  type AdminResponse {
+    status: Int
   }
   input LoginInput {
     email_id: String!
@@ -67,6 +77,5 @@ module.exports = gql`
     is_active: Boolean
     token: String!
     basket: [UserBasketProduct]
-   
   }
 `;
