@@ -14,6 +14,7 @@ module.exports = gql`
     is_active: Boolean
     product: BasketProduct
     user: BasketUser
+    quantityOption:QuantityOptions
   }
   type BasketUser {
     id: Int!
@@ -49,14 +50,21 @@ module.exports = gql`
   }
   input AddBasketInput {
     product_id: Int!
+    quantity_id:Int!
     user_id: Int!
     created_by: Int
   }
   type AddBasketResponse {
-    id: Int!
-    product_id: Int!
-    user_id: Int!
+    id: Int
+    product_id: Int
+    user_id: Int
     created_by: Int
+    product:AddBasketResponseProduct
+  }
+  type AddBasketResponseProduct{
+    id:Int
+    name:String
+    image:String
   }
   input UpdateBasketInput {
     id: Int!

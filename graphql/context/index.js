@@ -7,6 +7,7 @@ const verifyToken = async (token) => {
     if (!token) return null;
     const { id } = await jwt.verify(token, 'mySecret');
     const user = await tbl_users.findByPk(id);
+    // console.log(user)
     return user;
   } catch (error) {
     throw new AuthenticationError(error.message);

@@ -44,5 +44,11 @@ module.exports = {
       console.log("tbl_categorys.findAll()");
       return tbl_categorys.findByPk(id);
     },
+    async get_PopularCategory(_, args, { user }) {
+      return tbl_categorys.findAll({
+        include: ["product"],
+        where: { is_popular: 1 },
+      });
+    },
   },
 };

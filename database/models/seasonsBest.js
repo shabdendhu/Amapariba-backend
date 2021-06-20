@@ -1,13 +1,17 @@
 module.exports = (sequelize, Sequelize) => {
-  const Units = sequelize.define(
-    "tbl_units",
+  const SeasonsBest = sequelize.define(
+    "tbl_seasons_best",
     {
-      full_name: {
-        type: Sequelize.STRING,
+      product_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "tbl_products",
+          key: "id",
+        },
         allowNull: false,
       },
-      short_name: {
-        type: Sequelize.STRING,
+      is_popular: {
+        type: Sequelize.BOOLEAN,
         allowNull: false,
       },
       created_by: {
@@ -26,8 +30,11 @@ module.exports = (sequelize, Sequelize) => {
     },
     { createdAt: false, updatedAt: false }
   );
-  Units.associate = function (models) {
-    
+  SeasonsBest.associate = function (models) {
+    SeasonsBest.belongsTo(models.tbl_products, {
+      foreignKey: "product_id",
+      as: "Products",
+    });
   };
-  return Units;
+  return SeasonsBest;
 };

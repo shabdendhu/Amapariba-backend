@@ -6,10 +6,10 @@ module.exports = gql`
     get_quantityOptions_by_id(id: Int!): [QuantityOptions]
   }
   type QuantityOptions {
-    id:Int!
-    quantity:Int!
-    product_id:Int!
-    base_price:Int!
+    id:Int
+    quantity:Int
+    product_id:Int
+    base_price:Int
     unit_id:Int
     discount:Int
     created_by:Int

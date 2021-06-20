@@ -4,29 +4,24 @@ module.exports = (sequelize, Sequelize) => {
     {
       product_id: {
         type: Sequelize.INTEGER,
-        // primaryKey: true,
         references: {
           model: "tbl_products",
           key: "id",
         },
-        // allowNull: false,
       },
       user_id: {
         type: Sequelize.INTEGER,
-        // primaryKey: true,
         references: {
           model: "tbl_users",
           key: "id",
         },
-        // allowNull: false,
       },
-      created_by: {
+      quantity_id: {
         type: Sequelize.INTEGER,
-        allowNull: true,
-      },
-      updated_by: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
+        references: {
+          model: "tbl_quantity_options",
+          key: "id",
+        },
       },
       is_active: {
         type: Sequelize.BOOLEAN,
@@ -45,6 +40,10 @@ module.exports = (sequelize, Sequelize) => {
     Basket.belongsTo(models.tbl_users, {
       foreignKey: "user_id",
       as: "user",
+    });
+    Basket.belongsTo(models.tbl_quantity_options, {
+      foreignKey: "quantity_id",
+      as: "quantityOption",
     });
   };
 

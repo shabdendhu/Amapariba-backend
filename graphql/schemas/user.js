@@ -5,6 +5,8 @@ module.exports = gql`
     id: Int!
     name: String!
     email_id: String!
+    dob:String
+    gender:String
     user_type: String
     mobile_no: String
     created_by: Int
@@ -12,17 +14,28 @@ module.exports = gql`
     is_active: Boolean
     password: String!
   }
-
   extend type Mutation {
     register(input: RegisterInput!): RegisterResponse
+    update_user(input: UpdateUserInput): UpdateUserRes
     login(input: LoginInput!): LoginResponse
     add_newAdminUser(input: AdminInput!): AdminResponse
+  }
+  input UpdateUserInput {
+    id:Int
+    name: String
+    gender: String
+    dob: String
+    email_id: String
+    mobile_no: String
   }
   input AdminInput {
     id: Int!
     user_type: String!
     updated_by: Int
     is_active: Int
+  }
+  type UpdateUserRes{
+    status:Int
   }
   type AdminResponse {
     status: Int
@@ -32,19 +45,25 @@ module.exports = gql`
     password: String!
   }
   type RegisterResponse {
-    name: String!
-    email_id: String!
+    status: Boolean
+    message: String
+    data: RegisterResponseData
+  }
+  type RegisterResponseData {
+    id: Int
+    name: String
+    email_id: String
     user_type: String
     mobile_no: String
     created_by: Int
   }
 
   input RegisterInput {
-    name: String!
-    email_id: String!
+    name: String
+    email_id: String
     mobile_no: String
     created_by: Int
-    password: String!
+    password: String
   }
 
   type UserBasketProduct {
@@ -67,15 +86,22 @@ module.exports = gql`
     is_active: Boolean
   }
   type LoginResponse {
-    id: Int!
-    name: String!
-    email_id: String!
+    status: Boolean
+    message: String
+    data: LoginResponseData
+  }
+  type LoginResponseData {
+    id: Int
+    name: String
+    email_id: String
+    gender:String
+    dob:String
     user_type: String
     mobile_no: String
     created_by: Int
     updated_by: Int
     is_active: Boolean
-    token: String!
+    token: String
     basket: [UserBasketProduct]
   }
 `;

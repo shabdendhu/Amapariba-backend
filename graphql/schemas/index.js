@@ -6,7 +6,8 @@ const user = require("./user");
 const quantityOptions = require("./quantityOptions");
 const unit = require("./unit");
 const basket = require("./basket");
-
+const topDeals = require("./topDeal");
+const seasonsBest=require("./seasonsBest")
 const rootType = gql`
   type Query {
     root: String
@@ -25,4 +26,6 @@ module.exports = [
   quantityOptions,
   unit,
   basket,
+  topDeals,
+  seasonsBest
 ];

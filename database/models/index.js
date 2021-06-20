@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV = "production";
+const env = (process.env.NODE_ENV = "development");
 const config = require(__dirname + "/../config/config.js")[env];
 const db = {};
 
@@ -17,6 +17,7 @@ if (config.use_env_variable) {
     config.database,
     config.username,
     config.password,
+    // config.port,
     config
   );
 }
@@ -28,7 +29,7 @@ fs.readdirSync(__dirname)
     );
   })
   .forEach((file) => {
-    console.log(file);
+    // console.log(file);
     const model = require(path.join(__dirname, file))(
       sequelize,
       Sequelize.DataTypes
@@ -46,4 +47,19 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.sequelize.sync({ force: false }); //Change force:true if data base is needed and run once then revert it
+// readFile
+
+// let Textdata = [];
+// fs.readdirSync(`${__dirname.substring(0, __dirname.lastIndexOf("/"))}/controllers`).forEach((file) => {
+//  let filepath = `${__dirname.substring(0, __dirname.lastIndexOf("/"))}/controllers/${file}`
+//   fs.readFile(filepath, function (err, data) {
+//     if (err) throw err;
+//     if (data.includes("Sequelize")) {
+//       Textdata.push(`${file.substring(0, file.indexOf("."))}:done`);
+//     } else {
+//       Textdata.push(`${file.substring(0, file.indexOf("."))}:`);
+//     }
+//   });
+// })
+
 module.exports = db;

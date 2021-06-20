@@ -4,10 +4,13 @@ module.exports = gql`
   extend type Query {
     get_allCategory: [Category]
     get_Category_by_id(id: Int!): Category
+    get_PopularCategory:[Category]
   }
   type Category {
     id: Int
     name: String
+    image:String
+    is_popular:String
     created_by: Int
     updated_by: Int
     is_active: Boolean
@@ -37,6 +40,7 @@ module.exports = gql`
   }
   type AddCategoryResponse {
     id: Int
+    image:String
     name: String
   }
   input AddCategoryInput {

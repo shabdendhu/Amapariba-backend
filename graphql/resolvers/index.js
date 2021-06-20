@@ -7,7 +7,8 @@ const userResolvers = require("./user");
 const quantityOptionsResolvers = require("./quantityOptions");
 const unitResolvers = require("./unit");
 const basketResolvers = require("./basket");
-
+const topDealsResolvers = require("./topdeals");
+const seasonsBest = require("./seasonsBest");
 module.exports = [
   productResolvers,
   categoryResolvers,
@@ -16,4 +17,6 @@ module.exports = [
   quantityOptionsResolvers,
   unitResolvers,
   basketResolvers,
+  topDealsResolvers,
+  seasonsBest,
 ];

@@ -4,6 +4,7 @@ module.exports = gql`
   extend type Query {
     get_allProduct: [Products]
     get_product_by_id(id: Int!): Products
+    get_product_by_category(category_id:Int!):[Products]
   }
   type Products {
     id: Int
@@ -16,17 +17,23 @@ module.exports = gql`
     updated_by: Int
     is_active: Boolean
     category: ProductCategory
-    brand:ProductsBrand
+    brand:Brand
+    qntity:[ProductsQuantityOptions]
   }
-  type ProductsBrand{
-    id: Int
-    name: String
-    company_name: String
-    ratings: Int
-    created_by: Int
-    updated_by: Int
-    is_active: Boolean
+  type ProductsQuantityOptions{
+    id:Int
+    quantity:Int
+    product_id:Int
+    base_price:Int
+    unit_id:Int
+    discount:Int
+    created_by:Int
+    updated_by:Int
+    is_active:Boolean
+    # product:Products
+    unit:Unit
   }
+
   type ProductCategory {
     id: Int
     name: String

@@ -10,6 +10,15 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER,
         allowNull: true,
       },
+      image: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        defaultValue: true,
+      },
+      is_popular: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       updated_by: {
         type: Sequelize.INTEGER,
         allowNull: true,

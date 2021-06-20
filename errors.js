@@ -21,5 +21,10 @@ class ErrorHandler {
       );
     }
   }
+  is_authenticated(user) {
+    if (!user) {
+      throw new AuthenticationError("You must login first");
+    }
+  }
 }
 module.exports = new ErrorHandler();

@@ -49,14 +49,29 @@ module.exports = (sequelize, Sequelize) => {
   );
   Product.associate = function (models) {
     // associations can be defined here
-    Product.belongsTo(models.tbl_categorys, { foreignKey: "category_id", as: "category", });
-    Product.belongsTo(models.tbl_brands, { foreignKey: "brand_id", as: "brand", });
-    Product.belongsToMany(models.tbl_users, {
-      through: {
-          model: models.tbl_baskets
-      },
-      foreignKey: 'product_id'
-  });
+    Product.hasMany(models.tbl_quantity_options, {
+      foreignKey: "product_id",
+      as: "qntity",
+    });
+    Product.belongsTo(models.tbl_categorys, {
+      foreignKey: "category_id",
+      as: "category",
+    });
+    Product.belongsTo(models.tbl_brands, {
+      foreignKey: "brand_id",
+      as: "brand",
+    });
+    // Product.belongsTo(models.tbl_topdeal, {
+    //   foreignKey: "product_id",
+    //   as: "brand",
+    // });
+    // Product.belongsToMany(models.tbl_users, {
+    //   through: {
+    //     model: models.tbl_baskets,
+    //   },
+    //   foreignKey: "product_id",
+    // });
+    
   };
   return Product;
 };

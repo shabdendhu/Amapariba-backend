@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const server = require('./api/server');
 
-const port = process.env.PORT || 3301;
+const port = process.env.PORT || 9000;
 
 process.on('uncaughtException', (err) => {
   console.error(`${(new Date()).toUTCString()} uncaughtException:`, err);
