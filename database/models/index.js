@@ -46,7 +46,7 @@ Object.keys(db).forEach((modelName) => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-// db.sequelize.sync({ force: false }); //Change force:true if data base is needed and run once then revert it
+db.sequelize.sync({ force: false }); //Change force:true if data base is needed and run once then revert it
 // readFile
 
 // let Textdata = [];

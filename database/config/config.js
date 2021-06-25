@@ -2,12 +2,12 @@ require("dotenv").config();
 
 module.exports = {
   development: {
-    "username": "admin",
-    "password": "hD9ghw9e",
-    "database": "database_2",
-    "host": "mysql-34618-0.cloudclusters.net",
+    "username": "kishanAmapariba",
+    "password": "cYrONhMrQF3Fdi86TyBh",
+    "database": "amapariba_dev",
+    "host": "amaparibadb.cgjlqjt55fii.us-east-2.rds.amazonaws.com",
     "dialect": "mysql",
-    "port":"34618"
+    "port":"3306"
 
     // username: "kishan",
     // password: "manage",
@@ -16,19 +16,19 @@ module.exports = {
     // dialect: "mysql",
   },
   "test": {
-    "username": "admin",
-    "password": "hD9ghw9e",
-    "database": "database_2",
-    "host": "mysql-34618-0.cloudclusters.net",
+    "username": "kishanAmapariba",
+    "password": "cYrONhMrQF3Fdi86TyBh",
+    "database": "amapariba_dev",
+    "host": "amaparibadb.cgjlqjt55fii.us-east-2.rds.amazonaws.com",
     "dialect": "mysql",
-    "port":"34618"
+    "port":"3306"
   },
   "production": {
-    "username": "admin",
-    "password": "hD9ghw9e",
-    "database": "database_2",
-    "host": "mysql-34618-0.cloudclusters.net",
+    "username": "kishanAmapariba",
+    "password": "cYrONhMrQF3Fdi86TyBh",
+    "database": "amapariba_dev",
+    "host": "amaparibadb.cgjlqjt55fii.us-east-2.rds.amazonaws.com",
     "dialect": "mysql",
-    "port":"34618"
+    "port":"3306"
   }
 };
