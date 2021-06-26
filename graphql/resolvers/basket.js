@@ -14,10 +14,21 @@ module.exports = {
         created_by,
       });
       const data = await tbl_baskets.findAll({
-        include: ["product"],
+        include: [
+          "product",
+          {
+            model: tbl_quantity_options,
+            as: "quantityOption",
+            include: {
+              model: tbl_units,
+              as: "unit",
+              // include: [ /* etc */]
+            },
+          },
+        ],
         where: { id: AddResponse.id },
       });
-      console.log(data[0].quantityOption);
+      console.log("data[0].quantityOption",data[0].quantityOption.unit);
       return data[0];
     },
     async update_basket(_, { input }) {
@@ -44,7 +55,8 @@ module.exports = {
     async get_basket_by_id(_, { id }, context) {
       return tbl_baskets.findAll({
         include: [
-          "product","user",
+          "product",
+          "user",
           {
             model: tbl_quantity_options,
             as: "quantityOption",
@@ -55,7 +67,7 @@ module.exports = {
             },
           },
         ],
-        where: { user_id: id },
+        where: { user_id: id, is_active: 1 },
       });
     },
   },
