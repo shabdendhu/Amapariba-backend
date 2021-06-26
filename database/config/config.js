@@ -2,12 +2,12 @@ require("dotenv").config();
 
 module.exports = {
   development: {
-    "username": "admin",
-    "password": "Iti143.subu",
-    "database": "amapariba_dev",
-    "host": "database-1.cubo5wkdcxqk.ap-south-1.rds.amazonaws.com",
-    "dialect": "mysql",
-    "port":"3306"
+    username: process.env.DBUSERNAME,
+    password: process.env.DBPASSWORD,
+    database: process.env.DBDATABASE,
+    host: process.env.DBHOST,
+    dialect: "mysql",
+    port: process.env.DBPORT,
 
     // username: "kishan",
     // password: "manage",
@@ -15,20 +15,20 @@ module.exports = {
     // host: "localhost",
     // dialect: "mysql",h you ha
   },
-  "test": {
-    "username": "admin",
-    "password": "Iti143.subu",
-    "database": "amapariba_dev",
-    "host": "database-1.cubo5wkdcxqk.ap-south-1.rds.amazonaws.com",
-    "dialect": "mysql",
-    "port":"3306"
+  test: {
+    username: process.env.DBUSERNAME,
+    password: process.env.DBPASSWORD,
+    database: process.env.DBDATABASE,
+    host: process.env.DBHOST,
+    dialect: "mysql",
+    port: process.env.DBPORT,
   },
-  "production": {
-    "username": "admin",
-    "password": "Iti143.subu",
-    "database": "amapariba_dev",
-    "host": "database-1.cubo5wkdcxqk.ap-south-1.rds.amazonaws.com",
-    "dialect": "mysql",
-    "port":"3306"
-  }
+  production: {
+    username: process.env.DBUSERNAME,
+    password: process.env.DBPASSWORD,
+    database: process.env.DBDATABASE,
+    host: process.env.DBHOST,
+    dialect: "mysql",
+    port: process.env.DBPORT,
+  },
 };
