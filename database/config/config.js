@@ -3,32 +3,32 @@ require("dotenv").config();
 module.exports = {
   development: {
     "username": "admin",
-    "password": "hD9ghw9e",
-    "database": "database_2",
-    "host": "mysql-34618-0.cloudclusters.net",
+    "password": "Iti143.subu",
+    "database": "amapariba_dev",
+    "host": "database-1.cubo5wkdcxqk.ap-south-1.rds.amazonaws.com",
     "dialect": "mysql",
-    "port":"34618"
+    "port":"3306"
 
     // username: "kishan",
     // password: "manage",
     // database: "GraphQl_Nodejs_Sequlize",
     // host: "localhost",
-    // dialect: "mysql",
+    // dialect: "mysql",h you ha
   },
   "test": {
     "username": "admin",
-    "password": "hD9ghw9e",
-    "database": "database_2",
-    "host": "mysql-34618-0.cloudclusters.net",
+    "password": "Iti143.subu",
+    "database": "amapariba_dev",
+    "host": "database-1.cubo5wkdcxqk.ap-south-1.rds.amazonaws.com",
     "dialect": "mysql",
-    "port":"34618"
+    "port":"3306"
   },
   "production": {
     "username": "admin",
-    "password": "hD9ghw9e",
-    "database": "database_2",
-    "host": "mysql-34618-0.cloudclusters.net",
+    "password": "Iti143.subu",
+    "database": "amapariba_dev",
+    "host": "database-1.cubo5wkdcxqk.ap-south-1.rds.amazonaws.com",
     "dialect": "mysql",
-    "port":"34618"
+    "port":"3306"
   }
 };
