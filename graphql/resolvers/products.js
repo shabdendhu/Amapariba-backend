@@ -74,9 +74,22 @@ module.exports = {
     },
     async get_product_by_name(_, { name }, context) {
       return tbl_products.findAll({
+        include: [
+          "category",
+          "brand",
+          {
+            model: tbl_quantity_options,
+            as: "qntity",
+            include: {
+              model: tbl_units,
+              as: "unit",
+              // include: [ /* etc */]
+            },
+          },
+        ],
         limit: 10,
         where: { name: { [Op.like]: "%" + name + "%" } },
-        attributes: ["id", "name"],
+        // attributes: ["id", "name"],
       });
     },
     async get_product_by_category(_, { category_id }, { user = null }) {

@@ -2,6 +2,7 @@ const {
   tbl_baskets,
   tbl_quantity_options,
   tbl_units,
+  tbl_products
 } = require("../../database/models");
 module.exports = {
   Mutation: {
@@ -28,7 +29,7 @@ module.exports = {
         ],
         where: { id: AddResponse.id },
       });
-      console.log("data[0].quantityOption",data[0].quantityOption.unit);
+      console.log("data[0].quantityOption", data[0].quantityOption.unit);
       return data[0];
     },
     async update_basket(_, { input }) {
@@ -46,10 +47,26 @@ module.exports = {
   },
 
   Query: {
-    async get_allBasket(root, args, context) {
+    async get_allBasket(root, { id }, context) {
       const data = await tbl_baskets.findAll({
-        include: ["product", "user"],
+        include: [
+          {
+            model: tbl_products,
+            as: "product",
+            include: {
+              model: tbl_quantity_options,
+              as: "qntity",
+              include: {
+                model: tbl_units,
+                as: "unit",
+                // include: [ /* etc */]
+              },
+            },
+          },
+        ],
+        where: { user_id: id },
       });
+      console.log(data[0].product)
       return data;
     },
     async get_basket_by_id(_, { id }, context) {

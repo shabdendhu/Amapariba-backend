@@ -16,7 +16,7 @@ module.exports = gql`
   }
   extend type Mutation {
     register(input: RegisterInput!): RegisterResponse
-    update_user(input: UpdateUserInput): UpdateUserRes
+    update_user(input: UpdateUserInput): LoginResponse
     login(input: LoginInput!): LoginResponse
     add_newAdminUser(input: AdminInput!): AdminResponse
   }

@@ -5,7 +5,7 @@ module.exports = gql`
     get_allProduct: [Products]
     get_product_by_id(id: Int!): Products
     get_product_by_category(category_id: Int!): [Products]
-    get_product_by_name(name: String!): [ProductsName]
+    get_product_by_name(name: String!): [Products]
   }
   type ProductsName {
     id: Int

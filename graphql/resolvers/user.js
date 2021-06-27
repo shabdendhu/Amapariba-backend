@@ -24,11 +24,25 @@ module.exports = {
     },
     async update_user(_, { input }, { user = null }) {
       const { id, name, gender, dob, email_id, mobile_no } = input;
-      const updateres = await tbl_users.update(
-        { name, gender, dob, email_id, mobile_no },
-        { where: { id: id } }
-      );
-      return updateres[0];
+      const updateRes = await tbl_users
+        .update(
+          { name, gender, dob, email_id, mobile_no },
+          { where: { id: id }, returning: true }
+        )
+        .then(async (res) => {
+          return await tbl_users.findOne({
+            where: { email_id },
+          });
+        });
+      // const updatedUser = await tbl_users.findOne({
+      //   where: { email_id },
+      // });
+      console.log(updateRes);
+      return {
+        status: true,
+        message: "fetched",
+        data: updateRes,
+      } ;
     },
     async add_newAdminUser(_, { input }, { user = null }) {
       ErrorHandler.is_Manager(user);
@@ -37,6 +51,7 @@ module.exports = {
         { user_type },
         { where: { id: id } }
       );
+
       return { status: updataRes[0] };
     },
     async login(root, { input }, context) {
