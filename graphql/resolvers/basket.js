@@ -49,24 +49,36 @@ module.exports = {
   Query: {
     async get_allBasket(root, { id }, context) {
       const data = await tbl_baskets.findAll({
+        // include: [
+        //   {
+        //     model: tbl_products,
+        //     as: "product",
+        //     include: {
+        //       model: tbl_quantity_options,
+        //       as: "qntity",
+        //       include: {
+        //         model: tbl_units,
+        //         as: "unit",
+        //         // include: [ /* etc */]
+        //       },
+        //     },
+        //   },
+        // ],
+        limit : 10,
         include: [
+          "product",
           {
-            model: tbl_products,
-            as: "product",
+            model: tbl_quantity_options,
+            as: "quantityOption",
             include: {
-              model: tbl_quantity_options,
-              as: "qntity",
-              include: {
-                model: tbl_units,
-                as: "unit",
-                // include: [ /* etc */]
-              },
+              model: tbl_units,
+              as: "unit",
+              // include: [ /* etc */]
             },
           },
         ],
         where: { user_id: id },
       });
-      console.log(data[0].product)
       return data;
     },
     async get_basket_by_id(_, { id }, context) {

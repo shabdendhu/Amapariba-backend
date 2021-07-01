@@ -28,8 +28,9 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: true,
         defaultValue: "1",
       },
+      
     },
-    { createdAt: false, updatedAt: false }
+    {updatedAt: false }
   );
   Basket.associate = function (models) {
     // associations can be defined here

@@ -5,6 +5,8 @@ const cors = require('cors');
 const typeDefs = require('../graphql/schemas');
 const resolvers = require('../graphql/resolvers');
 const context = require('../graphql/context');
+// const customerappRoutes = require("");
+
 const app = express();
 
 app.use(cors());
@@ -20,6 +22,7 @@ const apolloServer = new ApolloServer({
     },
   },
 });
+// customerappRoutes(app, "/customer-app");
 
 apolloServer.applyMiddleware({ app, path: '/api' });
 

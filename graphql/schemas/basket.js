@@ -2,12 +2,12 @@ const { gql } = require("apollo-server-express");
 
 module.exports = gql`
   extend type Query {
-    get_allBasket(id:Int): [MyHistory]
+    get_allBasket(id: Int): [Basket]
     get_basket_by_id(id: Int!): [Basket]
   }
-  type MyHistory{
-    id:Int
-    product:Products
+  type MyHistory {
+    id: Int
+    product: Products
   }
   type Basket {
     id: Int!
@@ -19,6 +19,7 @@ module.exports = gql`
     product: BasketProduct
     user: BasketUser
     quantityOption: QuantityOptions
+    createdAt: String
   }
   type BasketUser {
     id: Int!

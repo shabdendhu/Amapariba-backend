@@ -49,3 +49,55 @@ query allTopdeals {
     }
   }
 }
+query Myhistory{
+  get_allBasket(id:1){
+    id
+    product{
+      id
+      name
+      category_id
+      brand_id
+      image
+      rating
+      created_by
+      updated_by
+      is_active
+      category{
+        id
+        name
+        created_by
+        updated_by
+        is_active
+      }
+      brand{
+        id
+        name
+        company_name
+        ratings
+        created_by
+        updated_by
+        is_active
+      }
+      qntity{
+        id
+        quantity
+        product_id
+        base_price
+        unit_id
+        discount
+        created_by
+        updated_by
+        is_active
+        unit{
+          id
+          full_name
+          short_name
+          created_by
+          updated_by
+          is_active
+          
+        }
+      }
+    }
+  }
+}
