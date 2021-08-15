@@ -1,6 +1,12 @@
 const { tbl_categorys } = require("../../database/models");
+const db = require("../../database/models");
 const ErroeHandler = require("../../errors");
+const { ProductByCategoryId } = require('../dataloader/category')
+
 module.exports = {
+  Category: {
+    product:ProductByCategoryId
+  },
   Mutation: {
     async create_new_category(_, { input }, { user = null }) {
       ErroeHandler.is_admin(user);
@@ -31,24 +37,21 @@ module.exports = {
   },
 
   Query: {
-    async get_allCategory(root, args, context) {
-      // const data =await tbl_categorys.findAll({
-      //   include: ["product"],
-      // })
-      // console.log(data[0].dataValues.product[1].dataValues);
+    async get_allCategory(root, args, context, info) {
       return tbl_categorys.findAll({
-        include: ["product"],
+        // include: product,
       });
     },
-    async get_Category_by_id(_, { id }, context) {
-      console.log("tbl_categorys.findAll()");
-      return tbl_categorys.findByPk(id);
+    async get_Category_by_id(_, { id }, context, info) {
+      return tbl_categorys.findByPk(id, {
+      });
     },
-    async get_PopularCategory(_, args, { user }) {
+    async get_PopularCategory(_, args, { user }, contex, info) {
       return tbl_categorys.findAll({
-        include: ["product"],
         where: { is_popular: 1 },
+        // attributes: keyFinder(requiredFilds),
       });
     },
   },
+
 };

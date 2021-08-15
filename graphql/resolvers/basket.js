@@ -4,7 +4,19 @@ const {
   tbl_units,
   tbl_products
 } = require("../../database/models");
+const { ProductById } = require("../dataloader/product");
+const { quantityByProductId, quantityById } = require("../dataloader/quantity");
+const { unitById } = require("../dataloader/unit");
+const { userById } = require("../dataloader/user");
 module.exports = {
+  QuantityOptions: {
+    unit:unitById
+  },
+  Basket: {
+    product: ProductById,
+    user: userById,
+    quantityOption: quantityById,
+  },
   Mutation: {
     async create_new_basket(_, { input }) {
       const { product_id, quantity_id, user_id, created_by } = input;

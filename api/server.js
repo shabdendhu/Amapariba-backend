@@ -1,10 +1,10 @@
-const express = require('express');
-const { createServer } = require('http');
-const { ApolloServer } = require('apollo-server-express');
-const cors = require('cors');
-const typeDefs = require('../graphql/schemas');
-const resolvers = require('../graphql/resolvers');
-const context = require('../graphql/context');
+const express = require("express");
+const { createServer } = require("http");
+const { ApolloServer } = require("apollo-server-express");
+const cors = require("cors");
+const typeDefs = require("../graphql/schemas");
+const resolvers = require("../graphql/resolvers");
+const context = require("../graphql/context");
 // const customerappRoutes = require("");
 
 const app = express();
@@ -18,13 +18,13 @@ const apolloServer = new ApolloServer({
   introspection: true,
   playground: {
     settings: {
-      'schema.polling.enable': false,
+      "schema.polling.enable": false,
     },
   },
 });
 // customerappRoutes(app, "/customer-app");
 
-apolloServer.applyMiddleware({ app, path: '/api' });
+apolloServer.applyMiddleware({ app, path: "/api" });
 
 const server = createServer(app);
 

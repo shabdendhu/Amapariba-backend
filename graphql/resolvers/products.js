@@ -6,7 +6,19 @@ const {
 const { Op } = require("sequelize");
 const { AuthenticationError } = require("apollo-server-express");
 const ErroeHandler = require("../../errors");
+const { categoryById } = require("../dataloader/category");
+const { brandById } = require("../dataloader/brand");
+const { quantityByProductId } = require("../dataloader/quantity");
+const { unitById } = require("../dataloader/unit");
 module.exports = {
+  ProductsQuantityOptions: {
+    unit:unitById
+  },
+  Products: {
+    brand:brandById,
+    category: categoryById,
+    qntity:quantityByProductId
+  },
   Mutation: {
     async create_new_product(_, { input }, { user = null }) {
       ErroeHandler.is_admin(user);
@@ -63,7 +75,9 @@ module.exports = {
     async get_allProduct(root, args, { user = null }) {
       // ErroeHandler.is_authenticated(user);
       const data = await tbl_products.findAll({
-        include: ["category", "brand", "qntity"],
+        include: [
+          // "category", "brand",
+          "qntity"],
       });
 
       return data;
@@ -74,19 +88,19 @@ module.exports = {
     },
     async get_product_by_name(_, { name }, context) {
       return tbl_products.findAll({
-        include: [
-          "category",
-          "brand",
-          {
-            model: tbl_quantity_options,
-            as: "qntity",
-            include: {
-              model: tbl_units,
-              as: "unit",
-              // include: [ /* etc */]
-            },
-          },
-        ],
+        // include: [
+        //   "category",
+        //   "brand",
+        //   {
+        //     model: tbl_quantity_options,
+        //     as: "qntity",
+        //     include: {
+        //       model: tbl_units,
+        //       as: "unit",
+        //       // include: [ /* etc */]
+        //     },
+        //   },
+        // ],
         limit: 10,
         where: { name: { [Op.like]: "%" + name + "%" } },
         // attributes: ["id", "name"],

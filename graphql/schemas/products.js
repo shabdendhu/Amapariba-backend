@@ -21,7 +21,7 @@ module.exports = gql`
     created_by: Int
     updated_by: Int
     is_active: Boolean
-    category: ProductCategory
+    category: Category
     brand: Brand
     qntity: [ProductsQuantityOptions]
   }

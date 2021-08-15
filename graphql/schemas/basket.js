@@ -13,10 +13,11 @@ module.exports = gql`
     id: Int!
     product_id: Int!
     user_id: Int!
+    quantity_id:Int
     created_by: Int
     updated_by: Int
     is_active: Boolean
-    product: BasketProduct
+    product: Products
     user: BasketUser
     quantityOption: QuantityOptions
     createdAt: String
@@ -27,17 +28,6 @@ module.exports = gql`
     email_id: String!
     user_type: String
     mobile_no: String
-    created_by: Int
-    updated_by: Int
-    is_active: Boolean
-  }
-  type BasketProduct {
-    id: Int
-    name: String
-    category_id: Int
-    brand_id: Int
-    image: String
-    rating: Int
     created_by: Int
     updated_by: Int
     is_active: Boolean

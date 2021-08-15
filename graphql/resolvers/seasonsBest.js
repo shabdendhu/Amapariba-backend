@@ -5,8 +5,9 @@ const {
     tbl_products,
   } = require("../../database/models");
   const ErroeHandler = require("../../errors");
+const { brandById } = require("../dataloader/brand");
   
-  module.exports = {
+module.exports = {
     Mutation: {
       async add_new_SeasonsBest(_, { input }, { user = null }) {
         ErroeHandler.is_admin(user);
@@ -27,14 +28,6 @@ const {
             {
               model: tbl_products,
               as: "Products",
-              include: {
-                model: tbl_quantity_options,
-                as: "qntity",
-                include: {
-                  model: tbl_units,
-                  as: "unit",
-                },
-              },
             },
           ],
         });
