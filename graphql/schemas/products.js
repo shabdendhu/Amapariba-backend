@@ -52,12 +52,13 @@ module.exports = gql`
     delete_product(id: Int!): DeleteProductResponse
   }
   type UpdateProductResponse {
-    status: Int
+    url: String
   }
   type DeleteProductResponse {
     status: Int
   }
   input AddProductInput {
+    file:Upload!
     name: String
     category_id: Int
     brand_id: Int
@@ -66,11 +67,11 @@ module.exports = gql`
     created_by: Int
   }
   type AddProductResponse {
-    name: String
-    category_id: Int
-    brand_id: Int
+    url: String
+
   }
   input UpdateProductInput {
+    file:Upload!
     id: Int
     name: String
     category_id: Int

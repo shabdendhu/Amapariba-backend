@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 module.exports = (sequelize, Sequelize) => {
   const Basket = sequelize.define(
     "tbl_baskets",
@@ -28,7 +30,19 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: true,
         defaultValue: "1",
       },
-      
+      createdAt:{
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        get: function () {
+          if (!this.getDataValue("createdAt")) {
+            return this.getDataValue("createdAt");
+          } else {
+            return moment
+              .utc(this.getDataValue("createdAt"))
+              .format("DD MMMM YYYY");
+          }
+        },
+      }
     },
     {updatedAt: false }
   );

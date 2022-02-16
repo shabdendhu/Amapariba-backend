@@ -1,3 +1,4 @@
+const fs = require("fs");
 const parseFields = require("graphql-parse-fields");
 class CommonMethords {
   moduleMaker = (info) => {
@@ -10,5 +11,23 @@ class CommonMethords {
       return Keys;
     }
   };
+  fileUploader=(file,path)=>{
+    const { createReadStream, filename, mimetype, encoding } =  file;
+    const file_name = filename.replace(" ", "");
+    const pathName = path.join(__dirname, `${path}${file_name}`);
+    const stream = createReadStream();
+    stream.pipe(fs.createWriteStream(pathName));
+  }
+  fileEditor=(file,path,imageUrl)=>{
+    const { createReadStream, filename, mimetype, encoding } =  file;
+    const file_name = filename.replace(" ", "");
+    const stream = createReadStream();
+    const pathName = path.join(__dirname, `${path}${file_name}`);
+    stream.pipe(fs.createWriteStream(pathName));
+    const oldPath=path.join(__dirname, `${path}${imageUrl}`)
+    if (fs.existsSync(oldPath)) {
+      fs.unlink(oldPath, (err) => {});
+    }
+  }
 }
 module.exports = new CommonMethords();

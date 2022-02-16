@@ -26,8 +26,7 @@ module.exports = (sequelize, Sequelize) => {
       dob: {
         type: Sequelize.STRING,
         allowNull: true,
-      }
-      ,
+      },
       email_id: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -44,6 +43,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.BOOLEAN,
         allowNull: true,
         defaultValue: "1",
+      },
+      profile_logo: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
     },
     { createdAt: false, updatedAt: false }

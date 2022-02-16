@@ -5,8 +5,23 @@ module.exports = {
   Mutation: {
     async create_new_quantityOptions(_, { input }, { user = null }) {
       ErroeHandler.is_admin(user);
-      const { full_name, short_name, created_by } = input;
-      return tbl_quantity_options.create({ full_name, short_name, created_by });
+      // console.log(input);
+      const {
+        quantity,
+        product_id,
+        base_price,
+        unit_id,
+        discount,
+        created_by,
+      } = input;
+      return tbl_quantity_options.create({
+        quantity,
+        product_id,
+        base_price,
+        unit_id,
+        discount,
+        created_by,
+      });
     },
     async update_quantityOptions(_, { input }, { user = null }) {
       ErroeHandler.is_admin(user);
@@ -27,7 +42,7 @@ module.exports = {
   Query: {
     async get_allQuantityOptions(root, args, context) {
       const data = await tbl_quantity_options.findAll();
-      console.log(data);
+      // console.log(data);
       return data;
     },
     async get_quantityOptions_by_id(_, { id }, context) {
@@ -35,7 +50,7 @@ module.exports = {
         include: ["product", "unit"],
         where: { product_id: id },
       });
-      console.log(data)
+      // console.log(data);
       return data;
     },
   },

@@ -12,6 +12,7 @@ module.exports = gql`
     created_by: Int
     updated_by: Int
     is_active: Boolean
+    profile_logo:String
     password: String!
   }
   extend type Mutation {
@@ -102,6 +103,7 @@ module.exports = gql`
     updated_by: Int
     is_active: Boolean
     token: String
+    profile_logo:String
     basket: [UserBasketProduct]
   }
 `;

@@ -1,6 +1,7 @@
 const { gql } = require("apollo-server-express");
 
 module.exports = gql`
+scalar Upload
   extend type Query {
     get_allCategory: [Category]
     get_Category_by_id(id: Int!): Category
@@ -28,10 +29,11 @@ module.exports = gql`
     is_active: Boolean
   }
   extend type Mutation {
-    create_new_category(input: AddCategoryInput!): AddCategoryResponse
+    create_new_category(input: AddCategoryInput): AddCategoryResponse
     update_category(input: UpdateCategoryInput!): UpdateCategoryResponse
     delete_category(id: Int!): DeleteCategoryResponse
   }
+
   type UpdateCategoryResponse {
     status: Int
   }
@@ -39,15 +41,20 @@ module.exports = gql`
     status: Int
   }
   type AddCategoryResponse {
-    id: Int
-    image:String
-    name: String
+    url: String!
+    # id: Int
+    # image:String
+    # name: String
+    # status:String
   }
   input AddCategoryInput {
+    file: Upload!
     name: String
     created_by: Int
   }
   input UpdateCategoryInput {
+    imageUrl:String
+    file: Upload!
     id: Int
     name: String
     updated_by: Int

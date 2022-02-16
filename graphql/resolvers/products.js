@@ -10,6 +10,8 @@ const { categoryById } = require("../dataloader/category");
 const { brandById } = require("../dataloader/brand");
 const { quantityByProductId } = require("../dataloader/quantity");
 const { unitById } = require("../dataloader/unit");
+const fs = require("fs");
+const path = require("path");
 module.exports = {
   ProductsQuantityOptions: {
     unit:unitById
@@ -21,21 +23,28 @@ module.exports = {
   },
   Mutation: {
     async create_new_product(_, { input }, { user = null }) {
-      ErroeHandler.is_admin(user);
-      const { id, name, category_id, brand_id, image, rating, created_by } =
-        input;
-      return tbl_products.create({
+      // ErroeHandler.is_admin(user);
+      const { id, name, category_id, brand_id, image, rating, created_by,file } =input;
+      const { createReadStream, filename, mimetype, encoding } = await file;
+      const file_name = filename.replace(" ", "");
+      const stream = createReadStream();
+      const pathName = path.join(__dirname, `../../public/product-images/${file_name}`);
+      stream.pipe(fs.createWriteStream(pathName));
+      await tbl_products.create({
         id,
         name,
         category_id,
         brand_id,
-        image,
+        image:`/product-images/${file_name}`,
         rating,
         created_by,
       });
+      return {
+        url:`/product-images/${file_name}`
+      }
     },
     async update_product(_, { input }, { user = null }) {
-      ErroeHandler.is_admin(user);
+      // ErroeHandler.is_admin(user);
       const {
         id,
         name,
@@ -46,20 +55,29 @@ module.exports = {
         updated_by,
         is_active,
       } = input;
+      const { createReadStream, filename, mimetype, encoding } = await file;
+      const file_name = filename.replace(" ", "");
+      const stream = createReadStream();
+      const pathName = path.join(__dirname, `../../public/product-images/${file_name}`);
+      stream.pipe(fs.createWriteStream(pathName));
+      const oldPath=path.join(__dirname, `../../public${imageUrl}`)
+      if (fs.existsSync(oldPath)) {
+        fs.unlink(oldPath, (err) => {});
+      }
 
       const updataRes = await tbl_products.update(
         {
           name,
           category_id,
           brand_id,
-          image,
+          image:`/product-images/${file_name}`,
           rating,
           updated_by,
           is_active,
         },
         { returning: false, where: { id } }
       );
-      return { status: updataRes[0] };
+      return { url: `/product-images/${file_name}` };
     },
     async delete_product(_, { id }, { user = null }) {
       ErroeHandler.is_admin(user);

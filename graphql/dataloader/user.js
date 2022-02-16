@@ -8,6 +8,7 @@ const brandByIdLoader = new DataLoader(async (id) => {
 });
 class UserLoader {
     userById(parent, arg, context, info) {
+        console.log(parent)
         return brandByIdLoader.load(parent.user_id)
     }
 }

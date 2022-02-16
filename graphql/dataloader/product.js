@@ -8,6 +8,7 @@ const ProductByIdLoader = new DataLoader(async (id) => {
 });
 class ProductLoader {
     ProductById(parent, args, context, info) {
+        console.log(parent)
         return ProductByIdLoader.load(parent.product_id);
     }
 }

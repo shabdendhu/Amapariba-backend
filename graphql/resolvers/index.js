@@ -9,6 +9,7 @@ const unitResolvers = require("./unit");
 const basketResolvers = require("./basket");
 const topDealsResolvers = require("./topdeals");
 const seasonsBest = require("./seasonsBest");
+const order=require("./order")
 module.exports = [
   productResolvers,
   categoryResolvers,
@@ -19,4 +20,5 @@ module.exports = [
   basketResolvers,
   topDealsResolvers,
   seasonsBest,
+  order
 ];

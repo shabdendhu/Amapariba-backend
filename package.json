@@ -5,26 +5,29 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "restart": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@apollo/gateway": "^0.28.1",
-    "apollo-server-express": "^2.24.1",
+    "@apollo/gateway": "^0.28.3",
+    "apollo-server-express": "^2.25.2",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dataloader": "^2.0.0",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
-    "graphql": "^15.5.0",
+    "graphql": "^15.5.2",
     "graphql-parse-fields": "^1.2.0",
+    "graphql-upload": "^12.0.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
-    "mysql2": "^2.2.5",
-    "pg": "^8.6.0",
-    "pg-hstore": "^2.3.3",
-    "sequelize": "^6.6.2"
+    "mysql2": "^2.3.0",
+    "nodemon": "^2.0.12",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.6.5"
   }
 }
